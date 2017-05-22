@@ -1,0 +1,9 @@
+<h4>Edit Registered Application</h4>
+<div class="row">
+  <div class="col-md-4">
+    <%= render partial: 'guideline' %>
+  </div>
+  <div class="col-md-8">
+    <%= render partial: 'form', locals: { app: @app, cancel_link: @app } %>
+  </div>
+</div>

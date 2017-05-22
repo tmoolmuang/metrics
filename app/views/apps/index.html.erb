@@ -1,0 +1,21 @@
+<h4>All Apps</h4>
+<div class="row">
+  <div class="col-md-8">
+    <% @apps.each do |app| %>
+     <div class="media">
+        <div class="media-body">
+          <h5 class="media-heading">
+            <%= link_to app.name, app %> 
+            <p><%= app.url %><br />
+            owner - <%= app.user.email %></p>
+          </h5>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% if user_signed_in? %> 
+    <div class="col-md-4">
+      <%= link_to "New Application", new_app_path, class: 'btn btn-success' %>
+    </div>
+  <% end %>
+</div>
