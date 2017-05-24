@@ -12,10 +12,7 @@ class AppsController < ApplicationController
   end  
   
   def create
-    @app = App.new
-    @app.name = params[:app][:name]
-    @app.url = params[:app][:url]
-    @app.user_id = params[:app][:user_id]
+    @app = App.new(app_params)
 
     if @app.save
       redirect_to @app, notice: "Application was registered successfully."
@@ -31,8 +28,7 @@ class AppsController < ApplicationController
   
   def update
     @app = App.find(params[:id])
-    @app.name = params[:app][:name]
-    @app.url = params[:app][:url]
+    @app.assign_attributes(app_params)
     
     if @app.save
       redirect_to @app, notice: "Application was updated successfully."
@@ -56,5 +52,10 @@ class AppsController < ApplicationController
   
   def myapps
     @apps = App.where(user_id: current_user.id).order('created_at desc')
+  end
+  
+  private
+  def app_params
+    params.require(:app).permit(:name, :url, :user_id)
   end
 end
