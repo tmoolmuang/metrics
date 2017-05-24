@@ -33,7 +33,7 @@ when "production"
     App.create!(
       name: Faker::App.name,
       url: Faker::Internet.url,
-      user: 1
+      user: User.first
     )
   end
 end
