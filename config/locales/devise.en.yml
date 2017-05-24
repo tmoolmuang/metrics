@@ -20,7 +20,7 @@ en:
       confirmation_instructions:
         subject: "Metrics - Confirmation instructions"
       reset_password_instructions:
-        subject: "Reset password instructions"
+        subject: "Metrics - Reset password instructions"
       unlock_instructions:
         subject: "Unlock instructions"
       email_changed:

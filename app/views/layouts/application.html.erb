@@ -11,9 +11,12 @@
     <div class="container">
       <ul class="nav nav-tabs">
         <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "All Applications", apps_path %></li>
+        <li><%= link_to "Demo Applications", demoapps_apps_path %></li>
         <% if user_signed_in? %>
           <li><%= link_to "My Applications", myapps_apps_path %></li>
+          <% if current_user.admin? %>
+            <li><%= link_to "All Applications", apps_path %></li>
+          <% end %>
         <% end %>
         <li><%= link_to "Contact", home_contact_path %></li>
         <div class="pull-right user-info">

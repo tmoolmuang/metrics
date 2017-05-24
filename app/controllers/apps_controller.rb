@@ -57,4 +57,10 @@ class AppsController < ApplicationController
   def myapps
     @apps = App.where(user_id: current_user.id).order('created_at desc')
   end
+  
+  def demoapps
+    @apps = App.where(user_id: 1).order('created_at desc')
+    # assuming db is seeded with admin
+  end
+  
 end
