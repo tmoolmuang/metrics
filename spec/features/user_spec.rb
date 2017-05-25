@@ -14,13 +14,10 @@ RSpec.describe "User", :type => feature do
   end
 
   feature "Sign in" do
-    let(:test_user) { create(:user) }
+    let(:std_user) { create(:user) }
 
     scenario "with registered user" do
-      visit new_user_session_path
-      fill_in "user_email", :with => test_user.email
-      fill_in "user_password", :with => test_user.password
-      click_button "Sign in"
+      login_as(std_user)
       expect(page).to have_content("Signed in successfully")
     end
 
