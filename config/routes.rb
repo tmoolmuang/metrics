@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
+   resources :apps do
+    collection do
+      get 'myapps'
+    end
+  end
+
   devise_for :users
   
-  get 'home/index'
+#   get 'apps' => 'home/index'
   get 'home/contact'
   root 'home#about'
-
+ 
 end

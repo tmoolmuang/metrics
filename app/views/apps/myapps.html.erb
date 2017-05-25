@@ -1,0 +1,23 @@
+<h4>My Registered Applications</h4>
+<div class="row">
+  <div class="col-md-8">
+    <p class="text-info"><small>
+      <%= pluralize(@apps.count, "application") %> by <%= current_user.email %><br />
+    </small></p>  
+    <% @apps.each do |app| %>
+      <div class="media">
+        <div class="media-body">
+          <h4 class="media-heading">
+            <%= link_to app.name, app %> - <%= app.url %>
+            <small class="text-info"> - created <%= time_ago_in_words(app.created_at) %> ago</small>
+          </h4>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% if user_signed_in? %> 
+    <div class="col-md-4">
+      <%= link_to "New Application", new_app_path, class: 'btn btn-success' %>
+    </div>
+  <% end %>
+</div>
