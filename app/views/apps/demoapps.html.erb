@@ -1,8 +1,8 @@
-<h4>My Registered Applications</h4>
+<h4>Demo Applications</h4>
 <div class="row">
   <div class="col-md-8">
     <p class="text-info"><small>
-      <%= pluralize(@apps.count, "application") %> by <%= current_user.email %><br />
+      <%= pluralize(@apps.count, "application") %> by admin<br />
     </small></p>  
     <% @apps.each do |app| %>
       <div class="media">
@@ -15,9 +15,6 @@
       </div>
     <% end %>
   </div>
-  <% if user_signed_in? %> 
-    <div class="col-md-4">
-      <%= link_to "New Application", new_app_path, class: 'btn btn-primary' %>
-    </div>
-  <% end %>
+  <div class="col-md-4">
+  </div>
 </div>

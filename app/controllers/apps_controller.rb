@@ -58,4 +58,10 @@ class AppsController < ApplicationController
   def app_params
     params.require(:app).permit(:name, :url, :user_id)
   end
+
+  def demoapps
+    @apps = App.where(user_id: 1).order('created_at desc')
+    # assuming db is seeded with admin
+  end
+  
 end
