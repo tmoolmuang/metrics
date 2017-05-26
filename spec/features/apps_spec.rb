@@ -1,12 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe "App", :type => feature do
-  let(:std_user) { create(:user) }
-  let(:admin_user) { create(:user, role: :admin) }
+  let(:std_user) { create(:user, confirmed_at: DateTime.now) }
+  let(:admin_user) { create(:user, role: :admin, confirmed_at: DateTime.now) }
   let(:test_app) { create(:app) }
   let(:edited_test_app) { create(:app) }
 
   feature 'View applications' do        
+    scenario 'allows anyone to view demo applications' do
+      visit demoapps_apps_path
+      expect(page).to have_content 'by admin'
+    end
+
     scenario 'allows a registered user to view the list of his or her own applications' do
       login_as(std_user)
       visit myapps_apps_path
