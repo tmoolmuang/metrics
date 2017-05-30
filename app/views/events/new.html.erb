@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4 entry edit-event">
+    <h4>New Event</h4>
+    <%= render partial: 'guideline' %>
+    <%= render partial: 'form', locals: { app: @app, event: @event, call_back: app_path(@app) } %>
+  </div>
+  <div class="col-md-4">
+  </div>
+</div>

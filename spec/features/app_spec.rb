@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "App", :type => feature do
   let(:std_user) { create(:user, confirmed_at: DateTime.now) }
   let(:admin_user) { create(:user, role: :admin, confirmed_at: DateTime.now) }
-  let(:test_app) { create(:app) }
-  let(:edited_test_app) { create(:app) }
+  let(:test_app) { create(:app, user: std_user) }
+  let(:edited_test_app) { create(:app, user: std_user) }
 
   feature 'View applications' do        
     scenario 'allows anyone to view demo applications' do
@@ -21,9 +21,8 @@ RSpec.describe "App", :type => feature do
     scenario 'allows admin to view the list of all applications' do
       login_as(admin_user)
       visit apps_path
-      expect(page).to have_content 'All Apps'
+      expect(page).to have_content 'All Applications'
     end
-
   end
   
   feature 'Register new application' do        
@@ -36,6 +35,11 @@ RSpec.describe "App", :type => feature do
       expect(page).to have_content 'Application was registered successfully'
     end
     
+    scenario 'not allow guest to add new application' do
+      visit root_path
+      expect(page).to have_no_content 'My Applications'
+    end
+
     scenario 'allows a registered user to edit application' do
       login_as(std_user)
       visit new_app_path
@@ -60,7 +64,6 @@ RSpec.describe "App", :type => feature do
   end
   
   feature 'Delete registered applications' do        
-      
     scenario 'allows a registered user to delete application' do
       login_as(std_user)
       visit new_app_path

@@ -15,9 +15,58 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
+body {
+  background-color: rgba(125, 185, 232, 0.05);
+}
 .user-info {
   margin-top: 10px;
 }
-
+.twitter-blue{
+  color: #428bca;
+}
+.top {
+  padding: 25px;
+  height: 75px;
+  border: 1px solid #E7E7E7;
+  box-sizing: border-box;
+  top: 4px;
+  background-color: white;
+}
+.top h4 {
+  display: inline;
+}
+.mid {
+  padding: 25px;
+  height: 600px;
+  border: 1px solid #E7E7E7;
+  top: 4px;
+  background-color: white;
+}
+.entry {
+  padding: 25px;
+  border: 1px solid #E7E7E7;
+  top: 10px;
+  background-color: white;
+}
+.signin {
+  height: 410px;
+}
+.signup {
+  height: 430px;
+}
+.edit {
+  height: 530px;
+}
+.resend {
+  height: 270px;
+}
+.edit-app {
+  height: 380px;
+}
+.edit-event {
+  height: 300px;
+}
+.change-password {
+  height: 350px;
+}
 
