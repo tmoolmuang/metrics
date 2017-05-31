@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe AppsController, type: :controller do
-  let(:my_app) { create(:app) }
+  let(:my_user) { create(:user, confirmed_at: DateTime.now) }
+  let(:my_app) { create(:app, user: my_user ) }
   
   describe "GET all apps" do
     it "returns http success" do
@@ -34,16 +35,20 @@ RSpec.describe AppsController, type: :controller do
  
   describe "application create" do
     it "increases the number of App by 1" do
-      expect{post :create, app: {name: "name", url: "url"} }.to change(App, :count).by(1)
+      expect{ post :create, app: {name: "new name", url: "new url", user_id: my_user.id} }.to change(App, :count).by(1)
     end
 
     it "assigns the new application to @app" do
-      post :create, app: {name: "name", url: "url"}
-      expect(assigns(:app)).to eq App.last
+      post :create, app: {name: my_app.name, url: my_app.url, user_id: my_user.id}
+  
+      created_app = assigns(:app)
+      expect(created_app.name).to eq my_app.name
+      expect(created_app.url).to eq my_app.url
+      expect(created_app.user_id).to eq my_app.user_id
     end
 
     it "redirects to the new application" do
-      post :create, app: {name: "name", url: "url"}
+      post :create, app: {name: my_app.name, url: my_app.url, user_id: my_user.id}
       expect(response).to redirect_to App.last
     end
   end
@@ -91,8 +96,8 @@ RSpec.describe AppsController, type: :controller do
     it "updates application with expected attributes" do
       new_name = "new name"
       new_url = "new url"
-  
-      put :update, id: my_app.id, app: {name: new_name, url: new_url}
+      sign_in my_user
+      put :update, id: my_app.id, app: {name: new_name, url: new_url, user: my_user}
   
       updated_app = assigns(:app)
       expect(updated_app.id).to eq my_app.id
@@ -103,7 +108,7 @@ RSpec.describe AppsController, type: :controller do
     it "redirects to the updated application" do
       new_name = "new name"
       new_url = "new url"
-  
+      sign_in my_user
       put :update, id: my_app.id, app: {name: new_name, url: new_url}
       expect(response).to redirect_to my_app
     end
@@ -111,12 +116,14 @@ RSpec.describe AppsController, type: :controller do
   
   describe "DELETE destroy" do
     it "deletes the application" do
+      sign_in my_user
       delete :destroy, {id: my_app.id}
       count = App.where({id: my_app.id}).size
       expect(count).to eq 0
     end
   
     it "redirects to application index" do
+      sign_in my_user
       delete :destroy, {id: my_app.id}
       expect(response).to redirect_to myapps_apps_path
     end

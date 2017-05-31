@@ -10,38 +10,75 @@
   <body>
     <div class="container">
       <ul class="nav nav-tabs">
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "Demo Applications", demoapps_apps_path %></li>
+        <li>
+          <%= link_to root_path do %>
+            <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;Home
+          <% end %>
+        </li>
+        <% if !admin? %>
+          <li>
+            <%= link_to demoapps_apps_path do %>
+              <i class="glyphicon glyphicon-stats"></i>&nbsp;&nbsp;Demo Applications
+            <% end %>
+          </li>
+        <% end %>
         <% if user_signed_in? %>
-          <li><%= link_to "My Applications", myapps_apps_path %></li>
-          <% if current_user.admin? %>
-            <li><%= link_to "All Applications", apps_path %></li>
+          <li>
+            <%= link_to myapps_apps_path do %>
+              <i class="glyphicon glyphicon-star"></i>&nbsp;&nbsp;My Applications
+            <% end %>
+          </li>
+          <% if admin? %>
+            <li>
+              <%= link_to apps_path do %>
+                <i class="glyphicon glyphicon-cog"></i>&nbsp;&nbsp;All Applications
+              <% end %>
+            </li>
           <% end %>
         <% end %>
-        <li><%= link_to "Contact", home_contact_path %></li>
-        <div class="pull-right user-info">
+        <li>
+          <%= link_to home_contact_path do %>
+            <i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Contact
+          <% end %>
+        </li>
+        <div class="navbar-right user-info">
         <% if user_signed_in? %>
-          <span>Signed in as: </span> 
-          <strong><%= current_user.email %></strong> |
-          <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> - 
-          <%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+          <strong class="twitter-blue"><%= current_user.email %></strong> |
+          <%= link_to edit_user_registration_path do %>
+	          <i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Edit profile
+          <% end %> - 
+          <%= link_to destroy_user_session_path, method: :delete do %>
+	          <i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Sign Out
+          <% end %>
         <% else %>
-          <%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link'  %> -
-          <%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %>
+          <%= link_to new_user_registration_path do %>
+	          <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Sign Up
+          <% end %> -
+          <%= link_to new_user_session_path do %>
+	          <i class="glyphicon glyphicon-log-in"></i>&nbsp;&nbsp;Sign In
+          <% end %>
         <% end %>
        </div>
       </ul>
-      <% if flash[:notice] %>
-        <div class="alert alert-success">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <%= flash[:notice] %>
+      <div class="row">
+        <div class="col-md-4"> 
         </div>
-      <% elsif flash[:alert] %>
-        <div class="alert alert-warning">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <%= flash[:alert] %>
+        <div class="col-md-4"> 
+        <% if flash[:notice] %>
+          <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= flash[:notice] %>
+          </div>
+        <% elsif flash[:alert] %>
+          <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
         </div>
-      <% end %>
+        <div class="col-md-4"> 
+        </div>
+      </div>
     </div>
     
     <%= yield %>

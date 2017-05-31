@@ -1,10 +1,11 @@
-<h4>Register New Application</h4>
 <div class="row">
   <div class="col-md-4">
-    <%= render partial: 'guideline' %>
   </div>
-  <div class="col-md-8">
-    <% link = if current_user.admin? then apps_path else myapps_apps_path end %>
-    <%= render partial: 'form', locals: { app: @app, cancel_link: link } %>
+  <div class="col-md-4 entry edit-app">
+    <h4>Register New Application</h4>
+    <%= render partial: 'guideline' %>
+    <%= render partial: 'form', locals: { app: @app, cancel_link: myapps_apps_path } %>
+  </div>
+  <div class="col-md-4">
   </div>
 </div>

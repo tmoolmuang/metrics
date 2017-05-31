@@ -1,21 +1,25 @@
-<h4>All Apps</h4>
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10 top">
+    <h4>All Applications</h4>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10 mid">
     <% @apps.each do |app| %>
      <div class="media">
         <div class="media-body">
-          <h5 class="media-heading">
-            <%= link_to app.name, app %> 
-            <p><%= app.url %><br />
-            owner - <%= app.user.email %></p>
-          </h5>
+          <h4 class="media-heading"><%= link_to app.name, app %> - <%= app.url %></h4>
+          <p><small class="text-info"><%= pluralize(app.events.count, "event") %>, owner - <%= app.user.email %></small></p>
         </div>
       </div>
     <% end %>
   </div>
-  <% if user_signed_in? %> 
-    <div class="col-md-4">
-      <%= link_to "New Application", new_app_path, class: 'btn btn-primary' %>
-    </div>
-  <% end %>
+  <div class="col-md-1">
+  </div>
 </div>

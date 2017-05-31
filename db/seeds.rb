@@ -28,12 +28,27 @@ when "development"
       user: User.all.sample
     )
   end
+  
+  50.times do
+    Event.create!(
+      name: Faker::Space.star,
+      app: App.all.sample
+    )
+  end
+
 when "production"
-  3.times do
+  2.times do
     App.create!(
       name: Faker::App.name,
       url: Faker::Internet.url,
       user: User.first
+    )
+  end
+  
+  5.times do
+    Event.create!(
+      name: Faker::Space.star,
+      app: App.all.sample
     )
   end
 end
@@ -41,3 +56,4 @@ end
 puts "Seed finished"
 puts "#{User.count} fake users created"
 puts "#{App.count} fake apps created"
+puts "#{Event.count} fake events created"
