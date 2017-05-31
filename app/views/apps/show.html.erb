@@ -15,19 +15,16 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-10 mid">
-    <p><%= @app.url %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <% if app_owner? || admin? %> 
-      <%= link_to "New Event", new_app_event_path(@app), class: 'btn btn-primary' %>
-    <% end %>
+    <p><%= @app.url %>
     <br /><br />
-      <% @events.each do |event| %>
+      <% @events.group_by(&:name).each do |name, events| %>
         <div class="media">
           <div class="media-body">
             <h4 class="media-heading">
-              <%= link_to event.name, app_event_path(@app, event) %>
+              <%= name %>
             </h4>
             <small>
-              submitted <%= time_ago_in_words(event.created_at) %> ago
+              count <%= events.count %>
             </small>
           </div>
         </div>
