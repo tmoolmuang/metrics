@@ -69,7 +69,6 @@ RSpec.describe AppsController, type: :controller do
       expect(assigns(:app)).to eq(my_app)
     end
   end
-  
    
   describe "GET edit" do
     it "returns http success" do
@@ -97,8 +96,8 @@ RSpec.describe AppsController, type: :controller do
     it "updates application with expected attributes" do
       new_name = "new name"
       new_url = "new url"
-  
-      put :update, id: my_app.id, app: {name: new_name, url: new_url}
+      sign_in my_user
+      put :update, id: my_app.id, app: {name: new_name, url: new_url, user: my_user}
   
       updated_app = assigns(:app)
       expect(updated_app.id).to eq my_app.id
@@ -109,7 +108,7 @@ RSpec.describe AppsController, type: :controller do
     it "redirects to the updated application" do
       new_name = "new name"
       new_url = "new url"
-  
+      sign_in my_user
       put :update, id: my_app.id, app: {name: new_name, url: new_url}
       expect(response).to redirect_to my_app
     end
@@ -117,12 +116,14 @@ RSpec.describe AppsController, type: :controller do
   
   describe "DELETE destroy" do
     it "deletes the application" do
+      sign_in my_user
       delete :destroy, {id: my_app.id}
       count = App.where({id: my_app.id}).size
       expect(count).to eq 0
     end
   
     it "redirects to application index" do
+      sign_in my_user
       delete :destroy, {id: my_app.id}
       expect(response).to redirect_to myapps_apps_path
     end

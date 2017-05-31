@@ -31,16 +31,19 @@ RSpec.describe EventsController, type: :controller do
 
   describe "POST create" do
     it "increases the number of event by 1" do
+      sign_in my_user
       expect{ post :create, app_id: my_app.id, event: {name: "new name"} }.to change(Event,:count).by(1)
     end
  
     it "assigns the new event to @event" do
+      sign_in my_user
       post :create, app_id: my_app.id, event: {name: my_event.name}
       event_instance = assigns(:event)
       expect(event_instance.name).to eq(my_event.name)
     end
  
     it "redirects to the new event" do
+      sign_in my_user
       post :create, app_id: my_app.id, event: {name: my_event.name}
       event_instance = assigns(:event)
       expect(response).to redirect_to app_event_path(id: event_instance.id, app_id: my_app.id)
@@ -60,9 +63,7 @@ RSpec.describe EventsController, type: :controller do
   
     it "assigns application to be updated to @app" do
       get :edit, app_id: my_app.id, id: my_event.id
-  
       event_instance = assigns(:event)
-  
       expect(event_instance.id).to eq my_event.id
       expect(event_instance.name).to eq my_event.name
     end
@@ -70,13 +71,15 @@ RSpec.describe EventsController, type: :controller do
 
   describe "GET #destroy" do
     it "deletes the event" do
-      delete :destroy, {id: my_event.id}
+      sign_in my_user
+      delete :destroy, id: my_event.id, app_id: my_app.id
       count = Event.where({id: my_event.id}).size
       expect(count).to eq 0
     end
   
     it "redirects to application" do
-      delete :destroy, {id: my_event.id}
+      sign_in my_user
+      delete :destroy, id: my_event.id, app_id: my_app.id
       expect(response).to redirect_to app_path(id: my_app.id)
     end
   end

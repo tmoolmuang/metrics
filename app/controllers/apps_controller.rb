@@ -29,25 +29,35 @@ class AppsController < ApplicationController
   
   def update
     @app = App.find(params[:id])
-    @app.assign_attributes(app_params)
     
-    if @app.save
-      redirect_to @app, notice: "Application was updated successfully."
+    if app_owner?
+      @app.assign_attributes(app_params)
+      if @app.save
+        redirect_to @app, notice: "Application was updated successfully."
+      else
+        flash.now[:alert] = error_messages(@app)
+        render :edit
+      end
     else
-      flash.now[:alert] = error_messages(@app)
-      render :edit
+      flash[:notice] = "Unauthorized: not an application owner."
+      redirect_to @app
     end
   end
   
   def destroy
     @app = App.find(params[:id])
     
-    if @app.destroy
-      flash[:notice] = "\"#{@app.name}\" was deleted successfully."
-      redirect_to myapps_apps_path
+    if app_owner?
+      if @app.destroy
+        flash[:notice] = "\"#{@app.name}\" was deleted successfully."
+        redirect_to myapps_apps_path
+      else
+        flash.now[:alert] = "There was an error deleting the application."
+        render :show
+      end
     else
-      flash.now[:alert] = "There was an error deleting the application."
-      render :show
+      flash[:notice] = "Unauthorized: not an application owner."
+      redirect_to @app
     end
   end
   
@@ -65,4 +75,7 @@ class AppsController < ApplicationController
     params.require(:app).permit(:name, :url, :user_id)
   end
   
+  def app_owner?
+    @app.user.id == current_user.id || current_user.admin?
+  end
 end
