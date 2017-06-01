@@ -8,7 +8,7 @@ class API::EventsController < ApplicationController
     headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
     headers['Access-Control-Allow-Headers'] = 'Content-Type'
   end
-   
+
   def create
     registered_application = App.find_by(url: request.env['HTTP_ORIGIN'])
     

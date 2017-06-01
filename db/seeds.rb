@@ -28,7 +28,7 @@ event4 = Faker::Space.star
   )
 end
 
-15.times do
+25.times do
   Event.create!(
     name: event1,
     app: App.first
@@ -42,7 +42,7 @@ end
   )
 end
 
-5.times do
+45.times do
   Event.create!(
     name: event3,
     app: App.first

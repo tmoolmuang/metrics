@@ -15,18 +15,30 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-10 mid">
-    <p><%= @app.url %>
-    <br /><br />
-      <% @events.group_by(&:name).each do |name, events| %>
-        <div class="media">
-          <div class="media-body">
-            <h4 class="media-heading">
-              <%= name %><small>  - count: <%= events.count %></small>
-            </h4>
+    <div class="row"> 
+      <div class="col-md-4">
+        <p><%= @app.url %>
+        <br /><br />
+        <% @events.group_by(&:name).each do |name, events| %>
+          <div class="media">
+            <div class="media-body">
+              <h4 class="media-heading">
+                <%= name %><small>  - count: <%= events.count %></small>
+              </h4>
+            </div>
           </div>
-        </div>
-      <% end %>
-    </p>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <% if @app.events.count != 0 %>
+          <%= pie_chart @events.group(:name).count, width: "600px", height: "250px" %>
+          <br />
+          <%= line_chart @events.group_by_day(:created_at).count, xtitle: "Time", ytitle: "Events", width: "600px", height: "250px" %>
+        <% else %>
+          <br /><br /><small>**  no events  **</small>
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class="col-md-1">
   </div>
