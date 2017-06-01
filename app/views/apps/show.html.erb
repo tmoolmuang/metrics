@@ -21,11 +21,8 @@
         <div class="media">
           <div class="media-body">
             <h4 class="media-heading">
-              <%= name %>
+              <%= name %><small>  - count: <%= events.count %></small>
             </h4>
-            <small>
-              count <%= events.count %>
-            </small>
           </div>
         </div>
       <% end %>
