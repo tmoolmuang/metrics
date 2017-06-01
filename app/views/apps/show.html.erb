@@ -17,7 +17,7 @@
   <div class="col-md-10 mid">
     <div class="row"> 
       <div class="col-md-4">
-        <p><%= @app.url %>
+        <p><%= link_to @app.url, "#{@app.url}", :target => '_blank' %>
         <br /><br />
         <% @events.group_by(&:name).each do |name, events| %>
           <div class="media">
