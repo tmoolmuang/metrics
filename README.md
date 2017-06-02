@@ -8,6 +8,15 @@ Users can integrate with any web applications to track user activities and repor
 + A client-side JavaScript snippet that allows a user to track events on their website.
 + A server-side API that captures and saves those events to a database.
 
+The app is deployed on Heroku: https://metrics-tm.herokuapp.com/
+
+The source code is here on GitHub: https://github.com/tmoolmuang/metrics
+
+This app was created as part of the [Bloc](www.bloc.io) Web Developer Track.
+
+![m1](https://cloud.githubusercontent.com/assets/24881495/26710197/0cb94b34-470d-11e7-80ec-40f297a1abda.JPG)
+
+
 # Setup and Configuration
 
 **Languages and Frameworks**: Ruby on Rails and Bootstrap
@@ -45,3 +54,4 @@ Trigger the tracked event in your browser by calling:
 ```
 blocmetrics.report("[..event name..]") 
 ```
+![metrics2](https://cloud.githubusercontent.com/assets/24881495/26710235/42f4135a-470d-11e7-905b-a4c9d7514b31.JPG)
