@@ -15,24 +15,30 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-10 mid">
-    <p><%= @app.url %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <% if app_owner? || admin? %> 
-      <%= link_to "New Event", new_app_event_path(@app), class: 'btn btn-primary' %>
-    <% end %>
-    <br /><br />
-      <% @events.each do |event| %>
-        <div class="media">
-          <div class="media-body">
-            <h4 class="media-heading">
-              <%= link_to event.name, app_event_path(@app, event) %>
-            </h4>
-            <small>
-              submitted <%= time_ago_in_words(event.created_at) %> ago
-            </small>
+    <div class="row"> 
+      <div class="col-md-4">
+        <p><%= link_to @app.url, "#{@app.url}", :target => '_blank' %>
+        <br /><br />
+        <% @events.group_by(&:name).each do |name, events| %>
+          <div class="media">
+            <div class="media-body">
+              <h4 class="media-heading">
+                <%= name %><small>  - count: <%= events.count %></small>
+              </h4>
+            </div>
           </div>
-        </div>
-      <% end %>
-    </p>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <% if @app.events.count != 0 %>
+          <%= pie_chart @events.group(:name).count, width: "600px", height: "250px" %>
+          <br />
+          <%= line_chart @events.group_by_day(:created_at).count, xtitle: "Time", ytitle: "Events", width: "600px", height: "250px" %>
+        <% else %>
+          <br /><br /><small>**  no events  **</small>
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class="col-md-1">
   </div>
