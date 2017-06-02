@@ -1,6 +1,6 @@
 # Metrics
 
-An analytics service that allows user to track events on websites. It is written in Ruby on Rails.
+An analytic service that allows users to track events on websites. It is written in Ruby on Rails.
 Users can integrate with any web applications to track user activities and report results.
 
 # Features
