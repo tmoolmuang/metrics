@@ -15,6 +15,7 @@ gem "chartkick"
 gem 'groupdate'
 gem 'mime-types', '2.6.2'
 gem 'bundler', '~> 1.11', '>= 1.11.2'
+gem 'public_suffix', '~> 2.0', '>= 2.0.2'
 
 group :development, :test do
   gem 'sqlite3'
