@@ -1,4 +1,4 @@
-# Metrics
+# Metrics  [![Build Status](https://travis-ci.org/tmoolmuang/metrics.svg?branch=master)](https://travis-ci.org/tmoolmuang/metrics)
 
 An analytic service that allows users to track events on websites. It is written in Ruby on Rails.
 Users can integrate with any web applications to track user activities and report results.
