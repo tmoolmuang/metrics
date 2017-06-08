@@ -232,6 +232,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   letter_opener
+  mime-types
   pg
   rails (= 4.2.5)
   rails_12factor
