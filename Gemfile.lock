@@ -220,6 +220,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass
+  bundler (~> 1.11, >= 1.11.2)
   byebug
   capybara
   chartkick
@@ -232,7 +233,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   letter_opener
-  mime-types
+  mime-types (~> 3.0)
   pg
   rails (= 4.2.5)
   rails_12factor

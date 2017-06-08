@@ -13,7 +13,8 @@ gem 'faker'
 gem 'devise'      
 gem "chartkick"
 gem 'groupdate'
-gem "mime-types"
+gem 'mime-types', '~> 3.0'
+gem 'bundler', '~> 1.11', '>= 1.11.2'
 
 group :development, :test do
   gem 'sqlite3'
